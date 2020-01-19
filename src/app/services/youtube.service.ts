@@ -18,15 +18,29 @@ export class YoutubeService {
 
     const url = `${this.youtubeUrl}playlistItems`;
 
-    const parametros = new HttpParams()
-      .set('part', 'snippet')
-      .set('maxResults', '10')
-      .set('playlistId', this.playList)
-      .set('key', this.apiKey)
+    // const parametros = new HttpParams()
+    //   .set('part', 'snippet')
+    //   .set('maxResults', '10')
+    //   .set('playlistId', this.playList)
+    //   .set('key', this.apiKey)
+    //   .append('pageToken', this.nextPageToken)
+
+    let parametros = new HttpParams();
+    parametros = parametros.append('part', 'snippet');
+    parametros = parametros.append('maxResults', '10');
+    parametros = parametros.append('playlistId', this.playList);
+    parametros = parametros.append('key', this.apiKey);
+    
+
+    if(this.nextPageToken) { 
+      parametros = parametros.append('pageToken', this.nextPageToken);
+    }
+
+      console.log(parametros);
 
     return this.http.get(url, { params: parametros }).pipe(
       map((data: any) => {
-        // console.log(data);
+        console.log(this.nextPageToken);
         this.nextPageToken = data.nextPageToken;
 
         const videos: any[] = [];

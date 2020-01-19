@@ -9,12 +9,14 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 // Imports
 
 import { HttpClientModule } from '@angular/common/http';
+import { DomSecurePipe } from './pipes/dom-secure.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    DomSecurePipe
   ],
   imports: [
     BrowserModule,
